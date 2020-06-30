@@ -24,9 +24,9 @@ class ToDo extends Component {
      
         let list = todos.slice();
         list.push(currentToDo);
-     
+        
         this.setState({
-        todos: list,
+          todos: list,
         });
       }
       
@@ -41,19 +41,13 @@ class ToDo extends Component {
      });
    }
 
-   delete = event => {
-      let {todos} = this.state;
+   delete = index => {
+      const filteredItems = this.state.todos.filter((el, idx) => {
+        return idx !== index;
+      });
       
-      let array = Array.from(document.getElementsByName("delete_btn"));
-
-      let index = array.indexOf(event.target);
-      
-      let list = todos.slice();
-      
-      list.splice(index, 1);
-
       this.setState({
-        todos: list,
+         todos: filteredItems,
       });
    }
 
@@ -69,8 +63,8 @@ class ToDo extends Component {
             <button type="clear" onClick={this.clear}> Clear List </button>
           </form>
              <ul> 
-              {todos.map(todo => 
-               <li> {todo}  <button name="delete_btn" type="delete" onClick={this.delete} item={todo}> delete </button> </li>
+              {todos.map((todo,index) => 
+               <li key={index}> {todo} <button type="delete" onClick={() => this.delete(index)}> delete </button> </li>
               )}
             </ul>
         </div>
