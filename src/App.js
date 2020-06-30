@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TaskList from './TaskList';
 
 class ToDo extends Component {
    constructor() {
@@ -62,11 +63,7 @@ class ToDo extends Component {
             <button type="submit"> Add Task </button>
             <button type="clear" onClick={this.clear}> Clear List </button>
           </form>
-             <ul> 
-              {todos.map((todo,index) => 
-               <li key={index}> {todo} <button type="delete" onClick={() => this.delete(index)}> delete </button> </li>
-              )}
-            </ul>
+          <TaskList todos={this.state.todos} deleteItems = {this.delete}/>
         </div>
       );
    }
