@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import TaskList from './TaskList';
+import ToDoForms from './ToDoForms';
 
 class ToDo extends Component {
    constructor() {
@@ -53,16 +54,9 @@ class ToDo extends Component {
    }
 
    render() {
-      let {todos} = this.state;
-      
       return (
         <div className='container'>
-          <form onSubmit={this.addItem}>
-            <label htmlFor="taskName"> Task Name: </label>
-            <input onChange={this.handleChange} name="taskName" type="text" placeholder="Add todo here!"/>
-            <button type="submit"> Add Task </button>
-            <button type="clear" onClick={this.clear}> Clear List </button>
-          </form>
+          <ToDoForms addItem={this.addItem} clear={this.clear} currentToDo={this.state.currentToDo} handleChange={this.handleChange}/>
           <TaskList todos={this.state.todos} deleteItems = {this.delete}/>
         </div>
       );
