@@ -18,18 +18,43 @@ class ToDo extends Component {
 
    addItem = event => {
      event.preventDefault(); 
-
-     let {todos} = this.state;
      
-     let list = todos.slice();
-     list.push(this.state.currentToDo);
-
-     this.setState({
-       todos: list,
-     });
+     if(document.getElementsByTagName("input")[0].value !== "") {
+        let {todos, currentToDo} = this.state;
      
-     // reset text field
+        let list = todos.slice();
+        list.push(currentToDo);
+     
+        this.setState({
+        todos: list,
+        });
+      }
+      
+     // reset text field after submitting form
      document.getElementsByTagName("input")[0].value = "";
+   }
+   
+   clear = () => {
+     this.setState({
+       todos: [],
+       currentToDo: "",
+     });
+   }
+
+   delete = event => {
+      let {todos} = this.state;
+      
+      let array = Array.from(document.getElementsByName("delete_btn"));
+
+      let index = array.indexOf(event.target);
+      
+      let list = todos.slice();
+      
+      list.splice(index, 1);
+
+      this.setState({
+        todos: list,
+      });
    }
 
    render() {
@@ -41,12 +66,13 @@ class ToDo extends Component {
             <label htmlFor="taskName"> Task Name: </label>
             <input onChange={this.handleChange} name="taskName" type="text" placeholder="Add todo here!"/>
             <button type="submit"> Add Task </button>
-            <ol>
-              {todos.map(todo =>
-                <li> {todo} </li> 
-              )}
-            </ol>
+            <button type="clear" onClick={this.clear}> Clear List </button>
           </form>
+             <ul> 
+              {todos.map(todo => 
+               <li> {todo}  <button name="delete_btn" type="delete" onClick={this.delete} item={todo}> delete </button> </li>
+              )}
+            </ul>
         </div>
       );
    }
