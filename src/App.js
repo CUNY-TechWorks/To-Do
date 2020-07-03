@@ -33,7 +33,7 @@ class ToDo extends Component {
       }
       
      // reset text field after submitting form
-     document.getElementsByTagName("input")[0].value = "";
+     this.state.currentToDo = "";
    }
    
    clear = () => {
@@ -51,6 +51,10 @@ class ToDo extends Component {
       this.setState({
          todos: filteredItems,
       });
+   }
+
+   update = () => {
+      
    }
 
    render() {
