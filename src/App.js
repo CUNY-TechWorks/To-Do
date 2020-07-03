@@ -61,7 +61,7 @@ class ToDo extends Component {
       return (
         <div className='container'>
           <ToDoForms addItem={this.addItem} clear={this.clear} currentToDo={this.state.currentToDo} handleChange={this.handleChange}/>
-          <TaskList todos={this.state.todos} deleteItems = {this.delete}/>
+          <TaskList todos={this.state.todos} deleteItems = {this.delete} updateItems={this.update}/>
         </div>
       );
    }
